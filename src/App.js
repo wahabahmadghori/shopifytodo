@@ -8,16 +8,31 @@ import TodoItem from './components/item-todo/TodoItem';
 
 export default class App extends Component {
   state={
-    items:[
-        {id:1, title:"wake up"},
-        {id:2, title:"wake up"}
-    ],
+    items:[],
     id:uuid(),
     item:'',
     editItem:false
   }
-  handleChange=(e)=>{console.log("Handle Change")}
-  handleSubmit=(e)=>{console.log("Handle Submit")}
+  handleChange=(e)=>{
+    this.setState({
+      item:e.target.value
+    })
+  }
+  handleSubmit=(e)=>{
+    e.preventDefault()
+    const newItem={
+      id:this.state.id,
+      title:this.state.item
+    }
+
+    const updateItems = [...this.state.items,newItem]
+    this.setState({
+      item:'',
+      id:uuid(),
+      items:updateItems,
+      editItem:false
+    })
+  }
   clearList=()=>{console.log("Clear List")}
   handleEdit=(id)=>{console.log("Edit Item")}
   handDelete=(id)=>{console.log("Handle Delete")}
@@ -34,7 +49,7 @@ export default class App extends Component {
               />
               <TodoList items={this.state.items}
               handleEdit={this.handleEdit}
-              handDelete={this.handDelete}
+              handleDelete={this.handDelete}
               clearList={this.clearList}/>
           </div>
         </div>
