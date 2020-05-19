@@ -33,9 +33,27 @@ export default class App extends Component {
       editItem:false
     })
   }
-  clearList=()=>{console.log("Clear List")}
-  handleEdit=(id)=>{console.log("Edit Item")}
-  handDelete=(id)=>{console.log("Handle Delete")}
+  clearList=()=>{
+    this.setState({
+      items:[]
+    })
+  }
+  handleEdit=(id)=>{
+    const filteredItem = this.state.items.filter((item=>item.id!==id))
+    const selectedItem = this.state.items.find((item)=>item.id==id)
+    this.setState({
+      item:selectedItem.title,
+      id:id,
+      items:filteredItem,
+      editItem:true
+    })
+  }
+  handDelete=(id)=>{
+    const filteredItem = this.state.items.filter((item=>item.id!==id))
+    this.setState({
+      items:filteredItem
+    })
+  }
   render() {
     return (
       <div class="container">
@@ -45,6 +63,8 @@ export default class App extends Component {
               <h3 class="text-center text-capitalize">Todo Input</h3>
               <TodoInput item={this.state.item}
               handleChange={this.handleChange}
+              
+              editItem={this.state.editItem}
               handleSubmit={this.handleSubmit}
               />
               <TodoList items={this.state.items}

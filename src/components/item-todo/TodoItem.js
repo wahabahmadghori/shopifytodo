@@ -4,7 +4,7 @@ export default class TodoItem extends Component {
     render() {
         const {title, handleDelete, handleEdit} = this.props
         return (
-            <li className="list-group-item d-flex justify-content-between my-3">
+            <li className="list-group-item d-flex justify-content-between my-1">
                 <h6 className="text-capitalize mx-2">{title}</h6>
                 <div>
                     <span className="text-success mx-2"><i className="fas fa-pen" onClick={handleEdit}></i></span>
